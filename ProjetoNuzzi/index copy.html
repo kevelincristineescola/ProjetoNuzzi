@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#b5482f">
+    <meta name="color-scheme" content="light">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Feira Nuzzi">
+    <title>Feira Nuzzi</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <svg style="display:none" aria-hidden="true">
+        <symbol id="i-eye" viewBox="0 0 24 24">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+            <circle cx="12" cy="12" r="3" />
+        </symbol>
+        <symbol id="i-eye-off" viewBox="0 0 24 24">
+            <path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a21.86 21.86 0 0 1 5.06-6.94" />
+            <path d="M9.9 4.24A10.94 10.94 0 0 1 12 4c7 0 11 8 11 8a21.86 21.86 0 0 1-3.22 4.44" />
+            <path d="M14.12 14.12a3 3 0 1 1-4.24-4.24" />
+            <line x1="1" y1="1" x2="23" y2="23" />
+        </symbol>
+        <symbol id="i-ticket" viewBox="0 0 24 24">
+            <path
+                d="M3 8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4V8z" />
+            <line x1="13" y1="6" x2="13" y2="18" stroke-dasharray="2 2.4" />
+        </symbol>
+        <symbol id="i-basket" viewBox="0 0 24 24">
+            <path d="M21 8H3l1.5 12.5A2 2 0 0 0 6.48 22h11.04a2 2 0 0 0 1.98-1.5L21 8z" />
+            <path d="M8 8V6a4 4 0 0 1 8 0v2" />
+        </symbol>
+        <symbol id="i-pin" viewBox="0 0 24 24">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+            <circle cx="12" cy="10" r="3" />
+        </symbol>
+        <symbol id="i-check" viewBox="0 0 24 24">
+            <polyline points="20 6 9 17 4 12" />
+        </symbol>
+        <symbol id="i-close" viewBox="0 0 24 24">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+        </symbol>
+        <symbol id="i-edit" viewBox="0 0 24 24">
+            <path d="M12 20h9" />
+            <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z" />
+        </symbol>
+        <symbol id="i-search" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="8" />
+            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+        </symbol>
+        <symbol id="i-link" viewBox="0 0 24 24">
+            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+        </symbol>
+        <symbol id="i-pause" viewBox="0 0 24 24">
+            <rect x="6" y="4" width="4" height="16" />
+            <rect x="14" y="4" width="4" height="16" />
+        </symbol>
+        <symbol id="i-play" viewBox="0 0 24 24">
+            <polygon points="5 3 19 12 5 21 5 3" />
+        </symbol>
+    </svg>
+
+    <div class="login-wrap" id="loginScreen">
+        <header class="top">
+            <div class="title-block">
+                <div class="eyebrow">Bem-vindo(a)</div>
+                <h1>Feira Nuzzi</h1>
+                <p>Um único login para reservar na feira ou tocar a sua barraca.</p>
+            </div>
+        </header>
+        <div class="lp-body">
+            <div class="auth-panel">
+                <button type="button" class="back-to-catalog" id="backToCatalogBtn">← Voltar ao catálogo</button>
+                <div class="top-tag">ACESSO ÚNICO</div>
+                <h2 id="lpTitle">Entrar</h2>
+                <p class="sub" id="lpSub">Acesse com o mesmo login, cliente ou vendedor — a gente leva você pro lugar
+                    certo.</p>
+                <div class="login-note" id="loginNote">Faça login (ou crie sua conta) pra continuar.</div>
+
+                <div class="auth-tabs">
+                    <button type="button" id="tabLoginBtn" class="active">Entrar</button>
+                    <button type="button" id="tabRegisterBtn">Criar conta</button>
+                </div>
+
+                <form id="loginForm">
+                    <div class="field">
+                        <label for="loginEmail">E-mail</label>
+                        <input type="email" id="loginEmail" placeholder="voce@email.com" autocomplete="username"
+                            required>
+                    </div>
+                    <div class="field">
+                        <label for="loginPass">Senha</label>
+                        <div class="input-wrap">
+                            <input type="password" id="loginPass" placeholder="••••••••" autocomplete="current-password"
+                                required>
+                            <button type="button" class="toggle-eye" data-target="loginPass" aria-label="Mostrar senha">
+                                <svg class="icon">
+                                    <use href="#i-eye" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="field-error" id="loginError">E-mail ou senha incorretos.</div>
+                    <div class="forgot-msg" id="forgotMsg">Se este e-mail existir, enviaremos as instruções
+                        (demonstração).</div>
+                    <div class="row-between">
+                        <label class="remember"><input type="checkbox" id="rememberMe" checked> Manter conectado</label>
+                        <button type="button" class="forgot-link" id="forgotBtn">Esqueci minha senha</button>
+                    </div>
+                    <button type="submit" class="auth-submit">Entrar</button>
+                </form>
+
+                <form id="registerForm" style="display:none">
+                    <div class="field" id="regNameField">
+                        <label for="regName">Seu nome</label>
+                        <input type="text" id="regName" placeholder="Como podemos te chamar?" required>
+                    </div>
+
+                    <div class="field">
+                        <label for="regEmail">E-mail</label>
+                        <input type="email" id="regEmail" placeholder="voce@email.com" autocomplete="username" required>
+                    </div>
+                    <div class="field">
+                        <label for="regPass">Crie uma senha</label>
+                        <div class="input-wrap">
+                            <input type="password" id="regPass" placeholder="Mínimo 6 caracteres" minlength="6"
+                                autocomplete="new-password" required>
+                            <button type="button" class="toggle-eye" data-target="regPass" aria-label="Mostrar senha">
+                                <svg class="icon">
+                                    <use href="#i-eye" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="field-error" id="registerError"></div>
+                    <button type="submit" class="auth-submit">Criar conta e entrar</button>
+                </form>
+
+                <div class="lp-note">
+                    <b>Contas de demonstração:</b><br>
+                    Cliente: cliente@feiranuzzi.com · senha compras123<br>
+                    Vendedor: nino@feiranuzzi.com · senha colheita2024
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="app-cliente">
+        <header class="top">
+            <div class="header-actions">
+                <button type="button" class="feira-login-link" id="openLoginBtn">Entrar</button>
+                <div class="cart-corner">
+                    <button class="cart-btn" id="cartBtn">
+                        🛒 Carrinho
+                        <span class="cart-badge" id="cartBadge" style="display:none">0</span>
+                    </button>
+                </div>
+            </div>
+            <div class="title-block">
+                <h1>Feira Nuzzi</h1>
+                <p>Um mapa vivo de barracas — histórias, gente e produtos feitos por quem faz de verdade.</p>
+            </div>
+        </header>
+
+        <div class="cart-overlay" id="cartOverlay">
+            <div class="cart-panel">
+                <button class="close" id="cartClose">✕</button>
+                <h2>Seu carrinho</h2>
+                <div id="cartContent"></div>
+            </div>
+        </div>
+
+        <div class="ticket-overlay" id="ticketOverlay">
+            <div class="ticket-panel" id="ticketPanel"></div>
+        </div>
+
+        <div class="confirm-overlay" id="confirmOverlay">
+            <div class="confirm-panel" id="confirmPanel"></div>
+        </div>
+
+        <div class="search-wrap">
+            <div class="search-box">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" id="searchInput" placeholder="Buscar barraca, produto ou categoria...">
+            </div>
+        </div>
+
+        <div class="filters" id="filters"></div>
+
+        <main>
+            <div class="grid" id="grid"></div>
+        </main>
+
+        <div class="overlay" id="overlay">
+            <div class="panel" id="panel"></div>
+        </div>
+    </div>
+
+    <div id="app-vendedor">
+        <div class="app">
+
+            <!-- ===================== PAINEL (HOME DO LOJISTA) ===================== -->
+            <div class="screen active" id="painel">
+                <div class="header">
+                    <div class="top-bar">
+                        <div class="logo-area">
+                            <div class="logo-texto">feira nuzzi</div>
+                            <div class="modo-loja-tag">MODO LOJA</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content">
+
+                    <div class="loja-card">
+                        <div class="loja-logo-wrap">
+                            <img class="loja-logo" id="painel-logo" src="" alt="Logo da loja"
+                                onerror="this.style.visibility='hidden'">
+                        </div>
+                        <div class="loja-info">
+                            <div class="loja-nome" id="painel-nome">Minha barraca</div>
+                            <div class="loja-categoria" id="painel-categoria">Adicione uma categoria</div>
+                        </div>
+                    </div>
+
+                    <div class="status-toggle-row">
+                        <div class="status-toggle-label">
+                            <div class="status-toggle-title">Status da loja</div>
+                            <div class="status-toggle-sub" id="status-sub">Fechado</div>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="status-switch" onchange="alternarStatus()">
+                            <span class="switch-track"><span class="switch-thumb"></span></span>
+                        </label>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-valor" id="stat-produtos">0</div>
+                            <div class="stat-label">Produtos</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-valor" id="stat-pedidos">0</div>
+                            <div class="stat-label">Pedidos hoje</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-valor" id="stat-vendas">R$ 0</div>
+                            <div class="stat-label">Vendido hoje</div>
+                        </div>
+                    </div>
+
+                    <div class="section-header" style="margin-top:22px;">
+                        <div class="section-title">Pedidos recentes</div>
+                        <div class="ver-mais" onclick="irPara('pedidos')">Ver todos ›</div>
+                    </div>
+                    <div id="lista-pedidos-recentes"></div>
+                    <div id="pedidos-vazio" class="no-results"
+                        style="display:none; text-align:center; padding:24px 0; color:var(--texto-sec); font-size:14px;">
+                        Nenhum pedido recebido ainda.</div>
+
+                </div>
+                <div class="bottom-nav" id="nav-painel"></div>
+            </div>
+
+            <!-- ===================== PRODUTOS (GESTÃO) ===================== -->
+            <div class="screen" id="produtos">
+                <div class="header">
+                    <div class="top-bar">
+                        <div class="logo-texto" style="font-size:20px">Produtos</div>
+                        <div class="ver-mais" id="produtos-contador" style="color:var(--texto-sec); font-weight:600;">
+                        </div>
+                    </div>
+                </div>
+                <div class="content" id="produtos-content">
+                    <div id="lista-produtos"></div>
+                    <div class="placeholder" id="produtos-vazio">
+                        <div class="placeholder-icon">🧺</div>
+                        <div class="placeholder-title">Nenhum produto cadastrado</div>
+                        <div class="placeholder-text">Toque no botão + para adicionar o primeiro item do seu cardápio.
+                        </div>
+                        <button class="btn-primary" onclick="abrirFormProduto()">Adicionar produto</button>
+                    </div>
+                </div>
+                <button class="fab" onclick="abrirFormProduto()">+</button>
+                <div class="bottom-nav" id="nav-produtos"></div>
+            </div>
+
+            <!-- ===================== FORM PRODUTO (ADICIONAR/EDITAR) ===================== -->
+            <div class="screen" id="produto-form">
+                <div class="detail-header">
+                    <button class="back-btn" onclick="irPara('produtos')">←</button>
+                    <div class="detail-title" id="form-titulo">Novo produto</div>
+                    <button class="header-action" onclick="salvarProduto()">Salvar</button>
+                </div>
+                <div class="form-content">
+                    <div class="form-group">
+                        <label class="form-label">Foto do produto</label>
+                        <div class="img-upload-box" id="produto-img-preview"
+                            onclick="document.getElementById('produto-img-input').click()">
+                            <img id="produto-img-tag" style="display:none;" alt="">
+                            <div class="img-upload-icon" id="produto-img-icon">📷</div>
+                            <div class="img-upload-text" id="produto-img-text">Toque para adicionar uma foto</div>
+                        </div>
+                        <input type="file" id="produto-img-input" accept="image/*" style="display:none"
+                            onchange="handleProdutoImagem(event)">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Nome do produto</label>
+                        <input class="form-input" id="input-nome" type="text" placeholder="Ex: X-Salada">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Descrição</label>
+                        <textarea class="form-textarea" id="input-desc"
+                            placeholder="Ingredientes, tamanho, observações..."></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Preço</label>
+                            <input class="form-input" id="input-preco" type="text" placeholder="R$ 0,00">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Categoria</label>
+                            <input class="form-input" id="input-categoria-produto" type="text"
+                                placeholder="Ex: Lanches">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Disponibilidade</label>
+                        <select class="form-select" id="input-disponivel">
+                            <option value="1">Disponível</option>
+                            <option value="0">Indisponível no momento</option>
+                        </select>
+                    </div>
+                    <button class="btn-outline" id="btn-excluir-produto" style="display:none;"
+                        onclick="excluirProduto()">Excluir produto</button>
+                </div>
+            </div>
+
+            <!-- ===================== PEDIDOS ===================== -->
+            <div class="screen" id="pedidos">
+                <div class="header">
+                    <div class="top-bar">
+                        <div class="logo-texto" style="font-size:20px">Pedidos</div>
+                        <button class="btn-teste" onclick="simularPedido()">+ Pedido teste</button>
+                    </div>
+                </div>
+                <div class="content">
+                    <div id="lista-pedidos-todos"></div>
+                    <div class="placeholder" id="pedidos-todos-vazio">
+                        <div class="placeholder-icon">📋</div>
+                        <div class="placeholder-title">Nenhum pedido ainda</div>
+                        <div class="placeholder-text">Os pedidos feitos pelos clientes vão aparecer aqui em tempo real.
+                            Use "Pedido teste" para ver como funciona.</div>
+                        <button class="btn-outline" style="color:var(--azul); border-color:rgba(10,132,255,0.4);"
+                            onclick="simularPedido()">Criar pedido de teste</button>
+                    </div>
+                </div>
+                <div class="bottom-nav" id="nav-pedidos-tela"></div>
+            </div>
+
+            <!-- ===================== SHEET: DETALHE DO PEDIDO ===================== -->
+            <div class="sheet-overlay" id="sheet-overlay" onclick="if(event.target===this) fecharSheet()">
+                <div class="sheet">
+                    <div class="sheet-handle"></div>
+                    <div id="sheet-content"></div>
+                </div>
+            </div>
+
+            <!-- ===================== PERFIL DA LOJA ===================== -->
+            <div class="screen" id="loja">
+                <div class="header">
+                    <div class="top-bar">
+                        <div class="logo-texto" style="font-size:20px">Minha loja</div>
+                    </div>
+                </div>
+                <div class="content" style="padding:0 0 90px;">
+                    <div class="banner-edit-wrap" onclick="document.getElementById('loja-banner-input').click()">
+                        <img id="loja-banner-preview" src="" alt="" style="display:none;">
+                        <button class="banner-edit-btn" type="button">📷 Trocar capa</button>
+                    </div>
+                    <input type="file" id="loja-banner-input" accept="image/*" style="display:none"
+                        onchange="handleLojaImagem(event, 'banner')">
+
+                    <div class="logo-edit-wrap" onclick="document.getElementById('loja-logo-input').click()">
+                        <img id="loja-logo-preview" src="" alt="" style="display:none;">
+                        <div class="logo-edit-btn">📷</div>
+                    </div>
+                    <input type="file" id="loja-logo-input" accept="image/*" style="display:none"
+                        onchange="handleLojaImagem(event, 'logo')">
+
+                    <div class="form-content" style="padding-top:14px;">
+                        <div class="form-group">
+                            <label class="form-label">Nome da loja</label>
+                            <input class="form-input" id="loja-input-nome" type="text" placeholder="Ex: Burger do Zé"
+                                oninput="atualizarPainel()">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Categoria</label>
+                            <input class="form-input" id="loja-input-categoria" type="text"
+                                placeholder="Ex: Hambúrgueres • Lanches" oninput="atualizarPainel()">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Descrição</label>
+                            <textarea class="form-textarea" id="loja-input-desc"
+                                placeholder="Conte um pouco sobre a sua barraca..."></textarea>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Tempo médio</label>
+                                <input class="form-input" id="loja-input-tempo" type="text" placeholder="Ex: 20-30 min">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Horário</label>
+                                <input class="form-input" id="loja-input-horario" type="text"
+                                    placeholder="Ex: 18h às 23h">
+                            </div>
+                        </div>
+                        <button class="btn-primary" onclick="salvarLoja()">Salvar alterações</button>
+                    </div>
+                </div>
+                <div class="bottom-nav" id="nav-loja"></div>
+            </div>
+
+        </div>
+    </div>
+
+ 
+</body>
+<script src="script.js"></script>
+</html>
